@@ -1,0 +1,19 @@
+---
+# tasks file for db_install
+- name: install database
+  apt: name='{{ item }}' state=present
+  with_items:
+    - default-mysql-server
+    - default-mysql-client
+
+- name: start database service
+  service: 
+    name: mysql
+    state: started
+
+- name: create a database
+  mysql_db:
+    name: '{{ db_name }}'
+    state: present
+
+
